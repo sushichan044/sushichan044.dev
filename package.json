@@ -1,0 +1,43 @@
+{
+  "name": "sushichan044.dev",
+  "version": "0.0.0",
+  "private": true,
+  "author": {
+    "name": "sushichan044",
+    "url": "https://github.com/sushichan044"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sushichan044/sushichan044.dev.git"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "dependencies": {
+    "@astrojs/cloudflare": "catalog:prod",
+    "astro": "catalog:prod",
+    "astro-seo": "catalog:prod",
+    "astro-simple-feature-flags": "^2.2.0",
+    "cnfast": "catalog:prod"
+  },
+  "devDependencies": {
+    "@astrojs/ts-plugin": "catalog:dev",
+    "@tailwindcss/vite": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "@typescript/native-preview": "catalog:dev",
+    "@virtual-live-lab/tsconfig": "catalog:dev",
+    "eslint": "catalog:dev",
+    "eslint-plugin-astro": "catalog:dev",
+    "eslint-plugin-better-tailwindcss": "catalog:dev",
+    "eslint-plugin-jsx-a11y": "catalog:dev",
+    "prettier": "catalog:dev",
+    "prettier-plugin-astro": "catalog:dev",
+    "tailwindcss": "catalog:dev",
+    "typescript": "catalog:dev",
+    "typescript-eslint": "catalog:dev",
+    "unplugin-icons": "catalog:dev",
+    "vite": "catalog:dev",
+    "vite-plus": "catalog:dev",
+    "wrangler": "catalog:dev"
+  },
+  "packageManager": "pnpm@11.9.0"
+}

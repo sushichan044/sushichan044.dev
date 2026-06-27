@@ -1,0 +1,28 @@
+import cloudflare from "@astrojs/cloudflare";
+import tailwindcss from "@tailwindcss/vite";
+import simpleFeatureFlags from "astro-simple-feature-flags";
+import { defineConfig, svgoOptimizer } from "astro/config";
+import Icons from "unplugin-icons/vite";
+
+export default defineConfig({
+  adapter: cloudflare(),
+  experimental: {
+    chromeDevtoolsWorkspace: true,
+    clientPrerender: true,
+    contentIntellisense: true,
+    svgOptimizer: svgoOptimizer(),
+  },
+  security: {
+    allowedDomains: [
+      {
+        hostname: "**.sushichan044.dev",
+        protocol: "https",
+      },
+    ],
+  },
+  site: "https://sushichan044.dev",
+  vite: {
+    plugins: [tailwindcss(), Icons({ compiler: "astro" })],
+  },
+  integrations: [simpleFeatureFlags()],
+});

@@ -1,0 +1,36 @@
+---
+import { SEO } from "astro-seo";
+import "../app.css";
+
+interface Props {
+  title: string;
+
+  /**
+   * @default false
+   */
+  disableTitleTemplate?: boolean;
+}
+
+const titleTemplate = Astro.props.disableTitleTemplate
+  ? "%s"
+  : "%s - sushichan044.dev";
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content={Astro.generator} name="generator" />
+
+    <SEO title={Astro.props.title} titleTemplate={titleTemplate} />
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="author" href="http://www.hatena.ne.jp/sushichan044" />
+  </head>
+  <slot />
+</html>

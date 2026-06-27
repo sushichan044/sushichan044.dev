@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --spacing-*: initial;
+  /* We disabled the default spacing tokens in favor of our own custom spacing scale. */
+  --spacing-0: 0;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  --text-*: initial;
+  /* We disabled the default text tokens in favor of our own custom text scale. */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+}
