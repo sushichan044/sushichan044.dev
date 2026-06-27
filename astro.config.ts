@@ -5,7 +5,12 @@ import { defineConfig, svgoOptimizer } from "astro/config";
 import Icons from "unplugin-icons/vite";
 
 export default defineConfig({
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: {
+      build: "compile",
+      runtime: "passthrough",
+    },
+  }),
   experimental: {
     chromeDevtoolsWorkspace: true,
     clientPrerender: true,
