@@ -22,7 +22,8 @@
     "astro": "catalog:prod",
     "astro-seo": "catalog:prod",
     "astro-simple-feature-flags": "^2.2.0",
-    "cnfast": "catalog:prod"
+    "cnfast": "catalog:prod",
+    "temporal-polyfill-lite": "catalog:prod"
   },
   "devDependencies": {
     "@astrojs/ts-plugin": "catalog:dev",

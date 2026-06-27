@@ -36,6 +36,7 @@ catalogs:
     astro: ^7.0.3
     astro-seo: ^1.1.0
     cnfast: ^0.0.8
+    temporal-polyfill-lite: ^0.4.1
 
 configDependencies:
   "@pnpm/pacquet": 0.11.12

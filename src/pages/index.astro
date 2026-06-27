@@ -1,10 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Page from "../layouts/Page.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog");
 ---
 
 <Page title="sushichan044.dev" disableTitleTemplate>
   <Layout>
     <h1 translate="no">sushichan044.dev</h1>
+
+    <h2>Posts</h2>
+    <ul>
+      {
+        allPosts.map((post) => (
+          <li>
+            <a href={`/posts/${post.id}`}>{post.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
   </Layout>
 </Page>

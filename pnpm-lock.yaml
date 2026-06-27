@@ -168,6 +168,9 @@ catalogs:
     cnfast:
       specifier: ^0.0.8
       version: 0.0.8
+    temporal-polyfill-lite:
+      specifier: ^0.4.1
+      version: 0.4.1
 
 overrides:
   vite: npm:@voidzero-dev/vite-plus-core@latest
@@ -192,6 +195,9 @@ importers:
       cnfast:
         specifier: catalog:prod
         version: 0.0.8
+      temporal-polyfill-lite:
+        specifier: catalog:prod
+        version: 0.4.1
     devDependencies:
       '@astrojs/ts-plugin':
         specifier: catalog:dev
@@ -3269,6 +3275,9 @@ packages:
   tapable@2.3.3:
     resolution: {integrity: sha512-uxc/zpqFg6x7C8vOE7lh6Lbda8eEL9zmVm/PLeTPBRhh1xCgdWaQ+J1CUieGpIfm2HdtsUpRv+HshiasBMcc6A==}
     engines: {node: '>=6'}
+
+  temporal-polyfill-lite@0.4.1:
+    resolution: {integrity: sha512-LkyxGT+Kud8HD560XKBa8zDg3Eg0Rl0sQVBIeLR0DrOkC1ezCsrkH+9MCMhqlYQDMayxtAhoqh6ObIfGgovqtQ==}
 
   tiny-inflate@1.0.3:
     resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
@@ -6877,6 +6886,8 @@ snapshots:
   tailwindcss@4.3.1: {}
 
   tapable@2.3.3: {}
+
+  temporal-polyfill-lite@0.4.1: {}
 
   tiny-inflate@1.0.3: {}
 

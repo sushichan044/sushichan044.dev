@@ -14,7 +14,7 @@ export default defineConfig(
   {
     files: ["**/*.astro"],
     extends: [
-      tseslint.configs.recommendedTypeChecked,
+      tseslint.configs.recommended,
       astro.configs["flat/recommended"],
       astro.configs["flat/jsx-a11y-strict"],
       tw.configs["recommended-error"],

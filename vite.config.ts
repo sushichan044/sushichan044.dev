@@ -36,8 +36,6 @@ export default defineConfig({
       },
       typegen: {
         command: ["astro sync", "wrangler types", "vp fmt worker-configuration.d.ts"],
-        input: ["astro.config.ts", "worker-configuration.d.ts"],
-        output: [".astro/**", "worker-configuration.d.ts"],
       },
     },
   },
