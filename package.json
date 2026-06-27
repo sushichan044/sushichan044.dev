@@ -29,6 +29,7 @@
     "@astrojs/ts-plugin": "catalog:dev",
     "@tailwindcss/vite": "catalog:dev",
     "@types/node": "catalog:dev",
+    "@typescript-eslint/parser": "catalog:dev",
     "@typescript/native-preview": "catalog:dev",
     "@virtual-live-lab/tsconfig": "catalog:dev",
     "eslint": "catalog:dev",
