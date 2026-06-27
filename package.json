@@ -12,6 +12,11 @@
   },
   "type": "module",
   "sideEffects": false,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
   "dependencies": {
     "@astrojs/cloudflare": "catalog:prod",
     "astro": "catalog:prod",

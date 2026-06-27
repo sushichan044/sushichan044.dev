@@ -10,15 +10,6 @@ export default defineConfig({
   },
   run: {
     tasks: {
-      dev: {
-        command: "astro dev",
-      },
-      build: {
-        command: "astro build",
-      },
-      preview: {
-        command: "astro preview",
-      },
       check: {
         command: ["vp run fmt:check", "vp lint", "eslint", "tsc --noEmit"],
         dependsOn: ["typegen"],
