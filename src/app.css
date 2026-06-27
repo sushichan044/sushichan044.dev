@@ -20,3 +20,7 @@
   --text-xl: 1.25rem;
   --text-2xl: 1.5rem;
 }
+
+@utility content-auto {
+  content-visibility: auto;
+}

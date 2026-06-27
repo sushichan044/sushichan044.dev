@@ -31,6 +31,13 @@ const titleTemplate = Astro.props.disableTitleTemplate
     <link rel="manifest" href="/site.webmanifest" />
 
     <link rel="author" href="http://www.hatena.ne.jp/sushichan044" />
+
+    {
+      /* Insert custom head elements with
+       * <Fragment slot="head">...heads</Fragment>
+       */
+    }
+    <slot name="head" />
   </head>
   <slot />
 </html>

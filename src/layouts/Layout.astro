@@ -1,22 +1,8 @@
-<body>
-  <main class="mx-auto p-xs lg:px-0">
+<body class="min-h-dvh">
+  <main class="container mx-auto p-xs lg:px-0">
     <slot />
   </main>
-  <footer class="mx-auto p-xs lg:px-0">© 2026 sushichan044.dev</footer>
+  <footer class="sticky top-full container mx-auto p-xs lg:px-0">
+    © 2026 sushichan044.dev
+  </footer>
 </body>
-
-<style>
-  body {
-    min-height: 100dvh;
-  }
-
-  main {
-    max-width: min(100%, 1024px);
-  }
-
-  footer {
-    position: sticky;
-    top: 100%;
-    max-width: min(100%, 1024px);
-  }
-</style>
