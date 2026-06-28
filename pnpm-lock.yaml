@@ -107,6 +107,9 @@ catalogs:
     '@astrojs/check':
       specifier: 0.9.9
       version: 0.9.9
+    '@astrojs/cloudflare':
+      specifier: 14.0.1
+      version: 14.0.1
     '@astrojs/ts-plugin':
       specifier: 1.10.9
       version: 1.10.9
@@ -128,6 +131,12 @@ catalogs:
     '@virtual-live-lab/tsconfig':
       specifier: 2.1.23
       version: 2.1.23
+    astro-og:
+      specifier: 0.3.2
+      version: 0.3.2
+    astro-simple-feature-flags:
+      specifier: 2.2.0
+      version: 2.2.0
     eslint:
       specifier: 10.6.0
       version: 10.6.0
@@ -165,21 +174,12 @@ catalogs:
       specifier: 4.105.0
       version: 4.105.0
   prod:
-    '@astrojs/cloudflare':
-      specifier: 14.0.1
-      version: 14.0.1
     astro:
       specifier: 7.0.3
       version: 7.0.3
-    astro-og:
-      specifier: 0.3.2
-      version: 0.3.2
     astro-seo:
       specifier: 1.1.0
       version: 1.1.0
-    astro-simple-feature-flags:
-      specifier: 2.2.0
-      version: 2.2.0
     astro-typesafe-routes:
       specifier: 5.1.0
       version: 5.1.0
@@ -218,21 +218,12 @@ importers:
 
   .:
     dependencies:
-      '@astrojs/cloudflare':
-        specifier: catalog:prod
-        version: 14.0.1(@types/node@26.0.1)(astro@7.0.3(patch_hash=ad4ec3aa00ee9338dcaff3a8c86dcc944f7e50bf1069dcea2bbea69d88f1d77a)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@26.0.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(jiti@2.7.0)(typescript@6.0.3)(workerd@1.20260625.1)(wrangler@4.105.0)(yaml@2.9.0)
       astro:
         specifier: catalog:prod
         version: 7.0.3(patch_hash=ad4ec3aa00ee9338dcaff3a8c86dcc944f7e50bf1069dcea2bbea69d88f1d77a)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@26.0.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0)
-      astro-og:
-        specifier: catalog:prod
-        version: 0.3.2(astro@7.0.3(patch_hash=ad4ec3aa00ee9338dcaff3a8c86dcc944f7e50bf1069dcea2bbea69d88f1d77a)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@26.0.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0))
       astro-seo:
         specifier: catalog:prod
         version: 1.1.0(prettier-plugin-astro@0.14.1)(prettier@3.9.0)(typescript@6.0.3)
-      astro-simple-feature-flags:
-        specifier: catalog:prod
-        version: 2.2.0(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0))(astro@7.0.3(patch_hash=ad4ec3aa00ee9338dcaff3a8c86dcc944f7e50bf1069dcea2bbea69d88f1d77a)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@26.0.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0))
       astro-typesafe-routes:
         specifier: catalog:prod
         version: 5.1.0(astro@7.0.3(patch_hash=ad4ec3aa00ee9338dcaff3a8c86dcc944f7e50bf1069dcea2bbea69d88f1d77a)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@26.0.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0))(react@19.2.7)(typescript@6.0.3)
@@ -258,6 +249,9 @@ importers:
       '@astrojs/check':
         specifier: catalog:dev
         version: 0.9.9(prettier-plugin-astro@0.14.1)(prettier@3.9.0)(typescript@6.0.3)
+      '@astrojs/cloudflare':
+        specifier: catalog:dev
+        version: 14.0.1(@types/node@26.0.1)(astro@7.0.3(patch_hash=ad4ec3aa00ee9338dcaff3a8c86dcc944f7e50bf1069dcea2bbea69d88f1d77a)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@26.0.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.1)(jiti@2.7.0)(typescript@6.0.3)(workerd@1.20260625.1)(wrangler@4.105.0)(yaml@2.9.0)
       '@astrojs/ts-plugin':
         specifier: catalog:dev
         version: 1.10.9
@@ -282,6 +276,12 @@ importers:
       '@virtual-live-lab/tsconfig':
         specifier: catalog:dev
         version: 2.1.23(typescript@6.0.3)
+      astro-og:
+        specifier: catalog:dev
+        version: 0.3.2(astro@7.0.3(patch_hash=ad4ec3aa00ee9338dcaff3a8c86dcc944f7e50bf1069dcea2bbea69d88f1d77a)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@26.0.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0))
+      astro-simple-feature-flags:
+        specifier: catalog:dev
+        version: 2.2.0(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0))(astro@7.0.3(patch_hash=ad4ec3aa00ee9338dcaff3a8c86dcc944f7e50bf1069dcea2bbea69d88f1d77a)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@26.0.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0))
       eslint:
         specifier: catalog:dev
         version: 10.6.0(jiti@2.7.0)

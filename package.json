@@ -18,11 +18,8 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "catalog:prod",
     "astro": "catalog:prod",
-    "astro-og": "catalog:prod",
     "astro-seo": "catalog:prod",
-    "astro-simple-feature-flags": "catalog:prod",
     "astro-typesafe-routes": "catalog:prod",
     "cnfast": "catalog:prod",
     "hono": "catalog:prod",
@@ -33,6 +30,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "catalog:dev",
+    "@astrojs/cloudflare": "catalog:dev",
     "@astrojs/ts-plugin": "catalog:dev",
     "@iconify-json/lucide": "catalog:dev",
     "@tailwindcss/vite": "catalog:dev",
@@ -41,6 +39,8 @@
     "@typescript-eslint/parser": "catalog:dev",
     "@typescript/native-preview": "catalog:dev",
     "@virtual-live-lab/tsconfig": "catalog:dev",
+    "astro-og": "catalog:dev",
+    "astro-simple-feature-flags": "catalog:dev",
     "eslint": "catalog:dev",
     "eslint-plugin-astro": "catalog:dev",
     "eslint-plugin-better-tailwindcss": "catalog:dev",
