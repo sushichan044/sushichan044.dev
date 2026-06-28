@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import { $path } from "astro-typesafe-routes/path";
 import Link from "./Link.astro";
+import FormattedPostDate from "../features/posts/components/FormattedPostDate.astro";
 
 interface Props {
   posts: Array<CollectionEntry<"post">>;
@@ -20,14 +21,13 @@ const { posts } = Astro.props;
           class="contents"
           href={$path({ to: "/posts/[...id]", params: { id: post.id } })}
         >
-          <span>
-            {post.data.publishedAt.toLocaleString("ja-JP", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+          <FormattedPostDate
+            class="text-sm text-zinc-500 dark:text-zinc-400"
+            time={post.data.publishedAt}
+          />
+          <span transition:name={`post:title:${post.id}`}>
+            {post.data.title}
           </span>
-          <span>{post.data.title}</span>
         </Link>
       </li>
     ))

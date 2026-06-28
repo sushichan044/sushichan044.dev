@@ -1,10 +1,10 @@
 ---
 import { SEO } from "astro-seo";
-import { inlineInitTheme } from "../lib/theme/index.browser";
-
-import "../app.css";
-import OpenGraph from "../components/meta/OpenGraph/OpenGraph.astro";
 import { $path } from "astro-typesafe-routes/path";
+import { ClientRouter } from "astro:transitions";
+import { inlineApplyTheme } from "../lib/theme/index.browser";
+import OpenGraph from "../components/meta/OpenGraph/OpenGraph.astro";
+import "../app.css";
 
 interface Props {
   title: string;
@@ -81,10 +81,11 @@ const defaultOGImageURL = new URL($path({ to: "/opengraph.png" }), Astro.url);
 
     <link rel="author" href="http://www.hatena.ne.jp/sushichan044" />
 
+    <ClientRouter />
     {
       /* Inline script to set data-theme before first paint to avoid flash of unstyled content. */
     }
-    <script is:inline set:html={`(${inlineInitTheme.toString()})()`} />
+    <script is:inline set:html={`(${inlineApplyTheme.toString()})()`} />
 
     {
       /* Insert custom head elements with
@@ -97,7 +98,14 @@ const defaultOGImageURL = new URL($path({ to: "/opengraph.png" }), Astro.url);
 </html>
 
 <script>
-  import { listenSystemThemeChange } from "../lib/theme/index.browser";
+  import {
+    applyTheme,
+    listenSystemThemeChange,
+  } from "../lib/theme/index.browser";
 
   listenSystemThemeChange();
+
+  // We must re-apply the theme after soft-navigation.
+  // https://docs.astro.build/en/guides/view-transitions/#script-re-execution
+  document.addEventListener("astro:after-swap", applyTheme);
 </script>

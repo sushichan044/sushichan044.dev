@@ -6,7 +6,7 @@ const LOCAL_STORAGE_KEY = "sushichan044-dev-color-mode";
 
 // Serialized via toString() and injected as an inline <script> in Page.astro.
 // Must be self-contained — cannot reference any module-scope identifiers.
-export function inlineInitTheme() {
+export function inlineApplyTheme() {
   const stored = localStorage.getItem("sushichan044-dev-color-mode");
   const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
@@ -17,6 +17,19 @@ export function inlineInitTheme() {
 
   document.documentElement.dataset["theme"] = resolved;
   document.documentElement.style.setProperty("color-scheme", colorScheme);
+}
+
+export function applyTheme() {
+  const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const config = stored === "dark" || stored === "light" || stored === "system" ? stored : "system";
+
+  const resolved = config === "system" ? (systemPrefersDark ? "dark" : "light") : config;
+  const colorScheme = config === "system" ? "light dark" : config;
+
+  window.document.documentElement.dataset["theme"] = resolved;
+  window.document.documentElement.style.setProperty("color-scheme", colorScheme);
 }
 
 export function listenSystemThemeChange() {
