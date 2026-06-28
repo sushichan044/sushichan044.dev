@@ -1,0 +1,30 @@
+diff --git a/dist/content/runtime.js b/dist/content/runtime.js
+index d931e096a01e4ed88b6200ee705d3c93eb4bf185..dd476ed66ae7a2514eb6415401cfe9bfe958b6be 100644
+--- a/dist/content/runtime.js
++++ b/dist/content/runtime.js
+@@ -356,8 +356,24 @@ async function updateImageReferencesInBody(html, fileName) {
+     }).filter(([, value]) => value != null).map(([key, value]) => value === "" ? `${key}=""` : `${key}="${escape(String(value))}"`).join(" ");
+   });
+ }
++function isTemporal(value) {
++  return /^\[object Temporal\.(?:Instant|ZonedDateTime|PlainDate|PlainTime|PlainDateTime|PlainYearMonth|PlainMonthDay|Duration)\]$/.test(
++    Object.prototype.toString.call(value),
++  );
++}
++function cloneContentData(value) {
++  const data = Object.create(null)
++  for (const [key, val] of Object.entries(value)) {
++    if (isTemporal(val)) {
++      data[key] = val;
++    } else {
++      data[key] = structuredClone(val)
++    }
++  }
++  return data;
++}
+ function updateImageReferencesInData(data, fileName, imageAssetMap) {
+-  const copy = structuredClone(data);
++  const copy = cloneContentData(data);
+   new Traverse(copy).forEach(function(ctx, val) {
+     if (typeof val === "string" && val.startsWith(IMAGE_IMPORT_PREFIX)) {
+       const src = val.replace(IMAGE_IMPORT_PREFIX, "");

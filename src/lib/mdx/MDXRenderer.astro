@@ -1,0 +1,16 @@
+---
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+import Link from "../../components/Link.astro";
+
+type Props = {
+  Content: AstroComponentFactory;
+};
+
+const { Content } = Astro.props;
+
+const componentsMap = {
+  a: Link,
+};
+---
+
+<Content components={componentsMap} />

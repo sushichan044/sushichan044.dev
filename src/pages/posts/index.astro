@@ -1,0 +1,41 @@
+---
+import { $path } from "astro-typesafe-routes/path";
+import Page from "../../layouts/Page.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getAllPublicPosts } from "../../lib/content/query";
+import ContentContainer from "../../components/ContentContainer.astro";
+import Link from "../../components/Link.astro";
+
+const allPosts = await getAllPublicPosts();
+---
+
+<Page title="posts">
+  <Layout>
+    <ContentContainer>
+      <h1 class="text-lg font-semibold md:text-2xl">Posts</h1>
+      <ul
+        class="grid grid-cols-[auto_1fr] gap-x-md divide-y divide-zinc-200 dark:divide-zinc-800"
+      >
+        {
+          allPosts.map((post) => (
+            <li class="col-span-full grid grid-cols-subgrid items-center py-sm">
+              <Link
+                class="contents"
+                href={$path({ to: "/posts/[...id]", params: { id: post.id } })}
+              >
+                <span>
+                  {post.data.publishedAt.toLocaleString("ja-JP", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </span>
+                <span>{post.data.title}</span>
+              </Link>
+            </li>
+          ))
+        }
+      </ul></ContentContainer
+    >
+  </Layout>
+</Page>

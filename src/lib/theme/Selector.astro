@@ -1,0 +1,68 @@
+---
+import IconMonitor from "~icons/lucide/monitor";
+import IconMoon from "~icons/lucide/moon";
+import IconSun from "~icons/lucide/sun";
+
+const themes = [
+  { value: "system", label: "システムの設定に従う", Icon: IconMonitor },
+  { value: "light", label: "ライトテーマ", Icon: IconSun },
+  { value: "dark", label: "ダークテーマ", Icon: IconMoon },
+];
+---
+
+<theme-selector
+  role="radiogroup"
+  aria-label="カラーテーマの切り替え"
+  class="inline-flex items-center divide-x divide-zinc-200 overflow-hidden rounded-md border border-zinc-200 dark:divide-zinc-700 dark:border-zinc-700"
+>
+  {
+    themes.map(({ value, label, Icon }) => (
+      <Fragment>
+        <button
+          role="radio"
+          type="button"
+          title={label}
+          data-theme-value={value}
+          aria-label={label}
+          aria-checked="false"
+          class="p-xs transition-colors hover:bg-zinc-100 aria-checked:bg-zinc-200 dark:hover:bg-zinc-800 dark:aria-checked:bg-zinc-700"
+        >
+          <Icon />
+        </button>
+      </Fragment>
+    ))
+  }
+</theme-selector>
+
+<script>
+  import type { ThemePreference } from "./index.browser";
+  import { queryTheme, updateTheme } from "./index.browser";
+
+  class ThemeSelectorElement extends HTMLElement {
+    connectedCallback() {
+      this.#syncState();
+      this.addEventListener("click", (e) => {
+        const btn = (e.target as Element).closest<HTMLButtonElement>(
+          "[data-theme-value]",
+        );
+        if (!btn) return;
+        updateTheme(btn.dataset["themeValue"] as ThemePreference);
+        this.#syncState();
+      });
+    }
+
+    #syncState() {
+      const current = queryTheme();
+      this.querySelectorAll<HTMLButtonElement>("[data-theme-value]").forEach(
+        (btn) => {
+          btn.setAttribute(
+            "aria-checked",
+            String(btn.dataset["themeValue"] === current),
+          );
+        },
+      );
+    }
+  }
+
+  customElements.define("theme-selector", ThemeSelectorElement);
+</script>

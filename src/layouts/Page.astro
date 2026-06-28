@@ -1,5 +1,6 @@
 ---
 import { SEO } from "astro-seo";
+import { inlineInitTheme } from "../lib/theme/index.browser";
 import "../app.css";
 
 interface Props {
@@ -33,6 +34,11 @@ const titleTemplate = Astro.props.disableTitleTemplate
     <link rel="author" href="http://www.hatena.ne.jp/sushichan044" />
 
     {
+      /* Inline script to set data-theme before first paint to avoid flash of unstyled content. */
+    }
+    <script is:inline set:html={`(${inlineInitTheme.toString()})()`} />
+
+    {
       /* Insert custom head elements with
        * <Fragment slot="head">...heads</Fragment>
        */
@@ -41,3 +47,9 @@ const titleTemplate = Astro.props.disableTitleTemplate
   </head>
   <slot />
 </html>
+
+<script>
+  import { listenSystemThemeChange } from "../lib/theme/index.browser";
+
+  listenSystemThemeChange();
+</script>

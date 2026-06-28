@@ -4,7 +4,8 @@ import { astro } from "astro/hono";
 import { env } from "cloudflare:workers";
 import { createFactory } from "hono/factory";
 import { logger } from "hono/logger";
-import "temporal-polyfill-lite/global"; // Required to use Temporal in workerd.
+// Required to use Temporal in Astro app.
+import "temporal-polyfill-lite/global";
 
 type HonoConfig = {
   Bindings: Env;

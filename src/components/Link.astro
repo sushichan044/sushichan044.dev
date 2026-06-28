@@ -1,0 +1,27 @@
+---
+import { HTMLAttributes } from "astro/types";
+import cn from "cnfast";
+
+interface Props extends HTMLAttributes<"a"> {
+  /**
+   * @default "text"
+   */
+  variant?: "text" | "unstyled";
+}
+
+const { variant = "text", class: className, ...rest } = Astro.props;
+---
+
+<a
+  {...rest}
+  class={cn(
+    "text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100",
+    variant === "unstyled" &&
+      "text-inherit hover:text-inherit dark:text-inherit dark:hover:text-inherit",
+    variant === "text" &&
+      "text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100",
+    className,
+  )}
+>
+  <slot />
+</a>

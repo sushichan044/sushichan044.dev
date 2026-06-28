@@ -1,0 +1,15 @@
+diff --git a/lib/index.mjs b/lib/index.mjs
+index dede8e1df6f8c373205954802496eb9288fcf748..60f6fba8d1630d55b61ab1d709ca2ce99092ce76 100644
+--- a/lib/index.mjs
++++ b/lib/index.mjs
+@@ -538,7 +538,9 @@ var no_deprecated_getentrybyslug_default = createRule("no-deprecated-getentrybys
+ const ALLOWED_EXPORTS = /* @__PURE__ */ new Set([
+ 	"getStaticPaths",
+ 	"partial",
+-	"prerender"
++	"prerender",
++	// PATCH: We must export `Route` when using `astro-typesafe-routes` for proper bundling.
++	"Route"
+ ]);
+ var no_exports_from_components_default = createRule("no-exports-from-components", {
+ 	meta: {

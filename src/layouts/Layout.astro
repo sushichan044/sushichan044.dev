@@ -1,8 +1,35 @@
-<body class="min-h-dvh">
-  <main class="container mx-auto p-xs lg:px-0">
+---
+import { $path } from "astro-typesafe-routes/path";
+import Link from "../components/Link.astro";
+import ThemeSelector from "../lib/theme/Selector.astro";
+import GithubIcon from "~icons/lucide/github";
+---
+
+<body class="min-h-dvh bg-zinc-50 dark:bg-zinc-900">
+  <header
+    class="container mx-auto flex place-items-center justify-between p-md lg:px-0"
+  >
+    <Link href={$path({ to: "/" })} class="text-lg font-semibold">
+      sushichan044.dev
+    </Link>
+
+    <div class="flex flex-row place-items-center-safe gap-x-md">
+      <ThemeSelector />
+      <Link
+        title="See code on GitHub"
+        href="https://github.com/sushichan044/sushichan044.dev"
+        target="_blank"
+      >
+        <GithubIcon />
+      </Link>
+    </div>
+  </header>
+  <main class="container mx-auto p-md lg:px-0">
     <slot />
   </main>
-  <footer class="sticky top-full container mx-auto p-xs lg:px-0">
+  <footer
+    class="sticky top-full container mx-auto flex flex-col place-items-center p-xs lg:px-0"
+  >
     © 2026 sushichan044.dev
   </footer>
 </body>

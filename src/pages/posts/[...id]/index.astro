@@ -1,25 +1,35 @@
 ---
-import { CollectionEntry, getCollection, render } from "astro:content";
+import { CollectionEntry, render } from "astro:content";
 import Page from "../../../layouts/Page.astro";
 import Layout from "../../../layouts/Layout.astro";
-import { GetStaticPaths } from "astro";
+import { createRoute } from "astro-typesafe-routes/create-route";
+import { getAllPublicPosts } from "../../../lib/content/query";
+import { $path } from "astro-typesafe-routes/path";
+import MDXRenderer from "../../../lib/mdx/MDXRenderer.astro";
+import ContentContainer from "../../../components/ContentContainer.astro";
 
 type Props = {
   post: CollectionEntry<"post">;
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getCollection("post");
+export const Route = createRoute({
+  routeId: "/posts/[...id]",
+});
+
+export const getStaticPaths = Route.createGetStaticPaths<Props>(async () => {
+  const posts = await getAllPublicPosts();
   return posts.map((post) => ({
     params: { id: post.id },
-    props: { post } satisfies Props,
+    props: { post },
   }));
-};
+});
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-
-const OGImageURL = new URL(`/posts/${post.id}/opengraph.png`, Astro.url);
+const OGImageURL = new URL(
+  $path({ to: "/posts/[...id]/opengraph.png", params: { id: post.id } }),
+  Astro.url,
+);
 ---
 
 <Page title={post.data.title}>
@@ -34,7 +44,27 @@ const OGImageURL = new URL(`/posts/${post.id}/opengraph.png`, Astro.url);
   </Fragment>
 
   <Layout>
-    <h1>{post.data.title}</h1>
-    <Content />
+    <ContentContainer>
+      <div class="grid gap-y-2xs">
+        <h1 class="text-lg font-semibold md:text-2xl">{post.data.title}</h1>
+        <time
+          class="text-sm text-zinc-500 dark:text-zinc-400"
+          datetime={post.data.publishedAt.toString({ timeZoneName: "never" })}
+        >
+          {
+            post.data.publishedAt.toLocaleString("ja-JP", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "numeric",
+              minute: "numeric",
+            })
+          }
+        </time>
+      </div>
+      <article class="space-y-sm">
+        <MDXRenderer Content={Content} />
+      </article>
+    </ContentContainer>
   </Layout>
 </Page>
