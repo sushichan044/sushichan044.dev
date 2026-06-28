@@ -1,13 +1,8 @@
 ---
+import cn from "cnfast";
 import IconMonitor from "~icons/lucide/monitor";
 import IconMoon from "~icons/lucide/moon";
 import IconSun from "~icons/lucide/sun";
-
-const themes = [
-  { value: "system", label: "システムの設定に従う", Icon: IconMonitor },
-  { value: "light", label: "ライトテーマ", Icon: IconSun },
-  { value: "dark", label: "ダークテーマ", Icon: IconMoon },
-];
 ---
 
 <theme-selector
@@ -15,28 +10,56 @@ const themes = [
   aria-label="カラーテーマの切り替え"
   class="inline-flex items-center divide-x divide-zinc-200 overflow-hidden rounded-md border border-zinc-200 dark:divide-zinc-700 dark:border-zinc-700"
 >
-  {
-    themes.map(({ value, label, Icon }) => (
-      <Fragment>
-        <button
-          role="radio"
-          type="button"
-          title={label}
-          data-theme-value={value}
-          aria-label={label}
-          aria-checked="false"
-          class="p-xs transition-colors hover:bg-zinc-100 aria-checked:bg-zinc-200 dark:hover:bg-zinc-800 dark:aria-checked:bg-zinc-700"
-        >
-          <Icon />
-        </button>
-      </Fragment>
-    ))
-  }
+  <button
+    role="radio"
+    type="button"
+    title="システムの設定に従う"
+    data-theme-value="system"
+    aria-label="システムの設定に従う"
+    aria-checked="false"
+    class={cn(
+      "p-xs transition-colors hover:bg-zinc-100",
+      "[html[data-theme-preference='system']_&]:bg-zinc-200",
+      "[html[data-theme-preference='system']_&]:dark:bg-zinc-700",
+    )}
+  >
+    <IconMonitor />
+  </button>
+  <button
+    role="radio"
+    type="button"
+    title="ライトテーマ"
+    data-theme-value="light"
+    aria-label="ライトテーマ"
+    aria-checked="false"
+    class={cn(
+      "p-xs transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800",
+      "[html[data-theme-preference='light']_&]:bg-zinc-200",
+      "[html[data-theme-preference='light']_&]:dark:bg-zinc-700",
+    )}
+  >
+    <IconSun />
+  </button>
+  <button
+    role="radio"
+    type="button"
+    title="ダークテーマ"
+    data-theme-value="dark"
+    aria-label="ダークテーマ"
+    aria-checked="false"
+    class={cn(
+      "p-xs transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800",
+      "[html[data-theme-preference='dark']_&]:bg-zinc-200",
+      "[html[data-theme-preference='dark']_&]:dark:bg-zinc-700",
+    )}
+  >
+    <IconMoon />
+  </button>
 </theme-selector>
 
 <script>
   import type { ThemePreference } from "./index.browser";
-  import { queryTheme, updateTheme } from "./index.browser";
+  import { getPreference, updateTheme } from "./index.browser";
 
   class ThemeSelectorElement extends HTMLElement {
     connectedCallback() {
@@ -52,7 +75,7 @@ const themes = [
     }
 
     #syncState() {
-      const current = queryTheme();
+      const current = getPreference();
       this.querySelectorAll<HTMLButtonElement>("[data-theme-value]").forEach(
         (btn) => {
           btn.setAttribute(

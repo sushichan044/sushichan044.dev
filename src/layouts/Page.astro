@@ -99,13 +99,10 @@ const defaultOGImageURL = new URL($path({ to: "/opengraph.png" }), Astro.url);
 
 <script>
   import {
-    applyTheme,
     listenSystemThemeChange,
+    listenAstroSoftNavigation,
   } from "../lib/theme/index.browser";
 
   listenSystemThemeChange();
-
-  // We must re-apply the theme after soft-navigation.
-  // https://docs.astro.build/en/guides/view-transitions/#script-re-execution
-  document.addEventListener("astro:after-swap", applyTheme);
+  listenAstroSoftNavigation();
 </script>
