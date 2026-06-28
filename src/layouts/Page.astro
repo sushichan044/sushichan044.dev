@@ -1,10 +1,31 @@
 ---
 import { SEO } from "astro-seo";
 import { inlineInitTheme } from "../lib/theme/index.browser";
+
 import "../app.css";
+import OpenGraph from "../components/meta/OpenGraph/OpenGraph.astro";
+import { $path } from "astro-typesafe-routes/path";
 
 interface Props {
   title: string;
+
+  /**
+   * @default
+   * sushichan044 の個人ウェブサイト。
+   */
+  description?: string;
+
+  /**
+   * @default
+   * {
+   *   url: new URL($path({to: "/opengraph.png"}), Astro.url)
+   *   alt: "sushichan044.dev"
+   * }
+   */
+  ogImage?: {
+    url: URL;
+    alt: string;
+  };
 
   /**
    * @default false
@@ -15,6 +36,11 @@ interface Props {
 const titleTemplate = Astro.props.disableTitleTemplate
   ? "%s"
   : "%s - sushichan044.dev";
+
+const description =
+  Astro.props.description ?? "sushichan044 の個人ウェブサイト。";
+
+const defaultOGImageURL = new URL($path({ to: "/opengraph.png" }), Astro.url);
 ---
 
 <html lang="ja">
@@ -23,7 +49,29 @@ const titleTemplate = Astro.props.disableTitleTemplate
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content={Astro.generator} name="generator" />
 
-    <SEO title={Astro.props.title} titleTemplate={titleTemplate} />
+    <SEO
+      title={Astro.props.title}
+      description={description}
+      titleTemplate={titleTemplate}
+    />
+
+    <OpenGraph
+      basic={{ title: Astro.props.title }}
+      optional={{
+        description,
+        locale: "ja_JP",
+        siteName: "sushichan044.dev",
+      }}
+      image={Astro.props.ogImage ?? {
+        url: defaultOGImageURL,
+        alt: "sushichan044.dev",
+      }}
+      twitter={{
+        card: "summary_large_image",
+        creator: "@sushichan044",
+        site: "@sushichan044",
+      }}
+    />
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

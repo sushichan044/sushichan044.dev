@@ -1,0 +1,134 @@
+---
+/**
+ * https://ogp.me/ns/article#
+ */
+type Props = {
+  /**
+   * When the article was first published.
+   */
+  publishedTime?: Temporal.Instant;
+
+  /**
+   * When the article was last changed.
+   */
+  modifiedTime?: Temporal.Instant;
+
+  /**
+   * When the article is out of date after.
+   */
+  expirationTime?: Temporal.Instant;
+
+  /**
+   * A high-level section name.
+   *
+   * @example
+   *   Technology;
+   */
+  section?: string;
+
+  /**
+   * Tag words associated with this article.
+   */
+  tags?: string[];
+
+  authors?: Array<{
+    /**
+     * A name normally given to an individual by a parent or self-chosen.
+     */
+    firstName?: string;
+
+    /**
+     * A name inherited from a family or marriage and by which the individual is commonly
+     * known.
+     */
+    lastName?: string;
+
+    /**
+     * A short unique string to identify them.
+     */
+    username?: string;
+
+    /**
+     * Their gender.
+     */
+    gender?: "male" | "female";
+  }>;
+};
+---
+
+<meta property="og:type" content="article" />
+
+{
+  Astro.props?.publishedTime && (
+    <meta
+      property="article:published_time"
+      content={Astro.props?.publishedTime.toString()}
+    />
+  )
+}
+
+{
+  Astro.props?.modifiedTime && (
+    <meta
+      property="article:modified_time"
+      content={Astro.props?.modifiedTime.toString()}
+    />
+  )
+}
+
+{
+  Astro.props?.expirationTime && (
+    <meta
+      property="article:expiration_time"
+      content={Astro.props?.expirationTime.toString()}
+    />
+  )
+}
+
+{
+  Astro.props?.section && (
+    <meta property="article:section" content={Astro.props?.section} />
+  )
+}
+
+{
+  Astro.props?.tags && (
+    <Fragment>
+      {Astro.props?.tags.map((tag) => (
+        <meta property="article:tag" content={tag} />
+      ))}
+    </Fragment>
+  )
+}
+
+{
+  Astro.props?.authors && (
+    <Fragment>
+      {Astro.props?.authors.map((author) => (
+        <Fragment>
+          {author.firstName && (
+            <meta
+              property="article:author:first_name"
+              content={author.firstName}
+            />
+          )}
+          {author.lastName && (
+            <meta
+              property="article:author:last_name"
+              content={author.lastName}
+            />
+          )}
+          {author.username && (
+            <meta
+              property="article:author:username"
+              content={author.username}
+            />
+          )}
+          {author.gender && (
+            <meta property="article:author:gender" content={author.gender} />
+          )}
+        </Fragment>
+      ))}
+    </Fragment>
+  )
+}

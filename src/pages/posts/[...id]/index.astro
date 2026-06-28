@@ -7,6 +7,7 @@ import { getAllPublicPosts } from "../../../lib/content/query";
 import { $path } from "astro-typesafe-routes/path";
 import MDXRenderer from "../../../lib/mdx/MDXRenderer.astro";
 import ContentContainer from "../../../components/ContentContainer.astro";
+import OpenGraphArticle from "../../../components/meta/OpenGraph/OpenGraphArticle.astro";
 
 type Props = {
   post: CollectionEntry<"post">;
@@ -32,15 +33,17 @@ const OGImageURL = new URL(
 );
 ---
 
-<Page title={post.data.title}>
+<Page
+  title={post.data.title}
+  description={post.data.description}
+  ogImage={{ url: OGImageURL, alt: post.data.title }}
+>
   <Fragment slot="head">
-    <meta name="description" content={post.data.description} />
-    <meta property="og:title" content={post.data.title} />
-    <meta property="og:description" content={post.data.description} />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content={Astro.url} />
-    <meta property="og:image" content={OGImageURL} />
-    <meta property="og:image:alt" content={post.data.title} />
+    <OpenGraphArticle
+      publishedTime={post.data.publishedAt.toInstant()}
+      modifiedTime={post.data.updatedAt?.toInstant()}
+      tags={post.data.tags}
+    />
   </Fragment>
 
   <Layout>

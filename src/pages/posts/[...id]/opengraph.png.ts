@@ -5,9 +5,9 @@ import { createElement } from "react";
 import { googleFonts } from "takumi-js/helpers";
 import { ImageResponse } from "takumi-js/response";
 
+import { PostOgImage } from "../../../components/OgImage";
 import { getAllPublicPosts } from "../../../lib/content/query";
 import { invariant } from "../../../utils/invariant";
-import { PostOgImage } from "./_PostOgImage";
 
 type Props = {
   post: CollectionEntry<"post">;

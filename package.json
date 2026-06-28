@@ -20,11 +20,13 @@
   "dependencies": {
     "@astrojs/cloudflare": "catalog:prod",
     "astro": "catalog:prod",
+    "astro-og": "catalog:prod",
     "astro-seo": "catalog:prod",
     "astro-simple-feature-flags": "catalog:prod",
     "astro-typesafe-routes": "catalog:prod",
     "cnfast": "catalog:prod",
     "hono": "catalog:prod",
+    "mime": "catalog:prod",
     "react": "catalog:react",
     "takumi-js": "catalog:prod",
     "temporal-polyfill-lite": "catalog:prod"

@@ -36,11 +36,13 @@ catalogs:
   prod:
     "@astrojs/cloudflare": 14.0.1
     astro: 7.0.3
+    astro-og: 0.3.2
     astro-seo: 1.1.0
     astro-simple-feature-flags: 2.2.0
     astro-typesafe-routes: 5.1.0
     cnfast: 0.0.8
     hono: 4.12.27
+    mime: 4.1.0
     takumi-js: 2.0.0-rc.1
     temporal-polyfill-lite: 0.4.1
   react:

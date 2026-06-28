@@ -1,5 +1,6 @@
 import cloudflare from "@astrojs/cloudflare";
 import tailwindcss from "@tailwindcss/vite";
+import og from "astro-og";
 import simpleFeatureFlags from "astro-simple-feature-flags";
 import typesafeRoutes from "astro-typesafe-routes";
 import { defineConfig, svgoOptimizer } from "astro/config";
@@ -27,7 +28,7 @@ export default defineConfig({
     ],
   },
   site: "https://sushichan044.dev",
-  integrations: [simpleFeatureFlags(), typesafeRoutes()],
+  integrations: [simpleFeatureFlags(), typesafeRoutes(), og()],
   vite: {
     build: {
       minify: import.meta.env.PROD && "oxc",

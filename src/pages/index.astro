@@ -2,6 +2,7 @@
 import { $path } from "astro-typesafe-routes/path";
 
 import Link from "../components/Link.astro";
+import PostList from "../components/PostList.astro";
 
 import Layout from "../layouts/Layout.astro";
 import Page from "../layouts/Page.astro";
@@ -15,35 +16,18 @@ const posts = await getRecentPublicPosts(5);
 <Page title="sushichan044.dev" disableTitleTemplate>
   <Layout>
     <ContentContainer>
-      <section class="space-y-md">
-        <h2 class="text-xl">Posts</h2>
+      <h2 class="text-xl font-semibold">Recent posts</h2>
 
-        <ul>
-          {
-            posts.map((post) => (
-              <li>
-                <Link
-                  href={$path({
-                    to: "/posts/[...id]",
-                    params: { id: post.id },
-                  })}
-                >
-                  {post.data.title}
-                </Link>
-              </li>
-            ))
-          }
-        </ul>
+      <PostList posts={posts} />
 
-        <div class="flex justify-end">
-          <Link
-            class="inline-flex flex-row place-items-center gap-xs"
-            href={$path({ to: "/posts" })}
-          >
-            View all posts <ArrowRightIcon />
-          </Link>
-        </div>
-      </section></ContentContainer
-    >
+      <div class="flex justify-end">
+        <Link
+          class="inline-flex flex-row place-items-center gap-xs"
+          href={$path({ to: "/posts" })}
+        >
+          View all posts <ArrowRightIcon />
+        </Link>
+      </div>
+    </ContentContainer>
   </Layout>
 </Page>

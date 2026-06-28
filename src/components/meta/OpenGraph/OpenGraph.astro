@@ -1,0 +1,158 @@
+---
+import { OpenGraph } from "./types";
+
+type Props = OpenGraph & {
+  twitter?: {
+    /**
+     * @default "summary_large_image"
+     */
+    card?: "summary" | "summary_large_image" | "app" | "player";
+
+    /**
+     * @example "@sushichan044"
+     */
+    site?: string;
+
+    /**
+     * @example "@sushichan044"
+     */
+    creator?: string;
+  };
+};
+
+const url = Astro.props.basic.url ?? Astro.url;
+---
+
+<meta property="og:title" content={Astro.props.basic.title} />
+<meta property="og:url" content={url} />
+
+{/* Optional */}
+{
+  Astro.props.optional?.description && (
+    <meta
+      property="og:description"
+      content={Astro.props.optional.description}
+    />
+  )
+}
+{
+  Astro.props.optional?.determiner && (
+    <meta property="og:determiner" content={Astro.props.optional.determiner} />
+  )
+}
+{
+  Astro.props.optional?.locale && (
+    <meta property="og:locale" content={Astro.props.optional.locale} />
+  )
+}
+{
+  Astro.props.optional?.localeAlternate &&
+    Astro.props.optional.localeAlternate.map((locale) => (
+      <meta property="og:locale:alternate" content={locale} />
+    ))
+}
+{
+  Astro.props.optional?.siteName && (
+    <meta property="og:site_name" content={Astro.props.optional.siteName} />
+  )
+}
+
+{/* Image */}
+{
+  Astro.props.image && (
+    <Fragment>
+      <meta property="og:image" content={Astro.props.image.url} />
+      <meta property="og:image:alt" content={Astro.props.image.alt} />
+
+      {Astro.props.image.type && (
+        <meta property="og:image:type" content={Astro.props.image.type} />
+      )}
+      {Astro.props.image.width && (
+        <meta
+          property="og:image:width"
+          content={String(Astro.props.image.width)}
+        />
+      )}
+      {Astro.props.image.height && (
+        <meta
+          property="og:image:height"
+          content={String(Astro.props.image.height)}
+        />
+      )}
+    </Fragment>
+  )
+}
+
+{/* Video */}
+{
+  Astro.props.video && (
+    <Fragment>
+      <meta property="og:video" content={Astro.props.video.url} />
+      <meta property="og:video:alt" content={Astro.props.video.alt} />
+
+      {Astro.props.video.type && (
+        <meta property="og:video:type" content={Astro.props.video.type} />
+      )}
+      {Astro.props.video.width && (
+        <meta
+          property="og:video:width"
+          content={String(Astro.props.video.width)}
+        />
+      )}
+      {Astro.props.video.height && (
+        <meta
+          property="og:video:height"
+          content={String(Astro.props.video.height)}
+        />
+      )}
+    </Fragment>
+  )
+}
+
+{/* Audio */}
+{
+  Astro.props.audio && (
+    <Fragment>
+      <meta property="og:audio" content={Astro.props.audio.url} />
+
+      {Astro.props.audio.type && (
+        <meta property="og:audio:type" content={Astro.props.audio.type} />
+      )}
+    </Fragment>
+  )
+}
+
+{/* Twitter */}
+<meta name="twitter:title" content={Astro.props.basic.title} />
+{
+  Astro.props.optional?.description && (
+    <meta
+      name="twitter:description"
+      content={Astro.props.optional.description}
+    />
+  )
+}
+{
+  Astro.props.image && (
+    <Fragment>
+      <meta name="twitter:image" content={Astro.props.image.url} />
+      <meta name="twitter:image:alt" content={Astro.props.image.alt} />
+    </Fragment>
+  )
+}
+{
+  Astro.props.twitter && (
+    <Fragment>
+      <meta
+        name="twitter:card"
+        content={Astro.props.twitter.card ?? "summary_large_image"}
+      />
+      {Astro.props.twitter.site && (
+        <meta name="twitter:site" content={Astro.props.twitter.site} />
+      )}
+      {Astro.props.twitter.creator && (
+        <meta name="twitter:creator" content={Astro.props.twitter.creator} />
+      )}
+    </Fragment>
+  )
+}

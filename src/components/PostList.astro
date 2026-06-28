@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { $path } from "astro-typesafe-routes/path";
+import Link from "./Link.astro";
+
+interface Props {
+  posts: Array<CollectionEntry<"post">>;
+}
+
+const { posts } = Astro.props;
+---
+
+<ul
+  class="grid grid-cols-[auto_1fr] gap-x-md divide-y divide-zinc-200 dark:divide-zinc-800"
+>
+  {
+    posts.map((post) => (
+      <li class="col-span-full grid grid-cols-subgrid items-center py-sm">
+        <Link
+          class="contents"
+          href={$path({ to: "/posts/[...id]", params: { id: post.id } })}
+        >
+          <span>
+            {post.data.publishedAt.toLocaleString("ja-JP", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </span>
+          <span>{post.data.title}</span>
+        </Link>
+      </li>
+    ))
+  }
+</ul>
