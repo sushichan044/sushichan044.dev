@@ -1,0 +1,40 @@
+---
+import { CollectionEntry, getCollection, render } from "astro:content";
+import Page from "../../../layouts/Page.astro";
+import Layout from "../../../layouts/Layout.astro";
+import { GetStaticPaths } from "astro";
+
+type Props = {
+  post: CollectionEntry<"post">;
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getCollection("post");
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post } satisfies Props,
+  }));
+};
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const OGImageURL = new URL(`/posts/${post.id}/opengraph.png`, Astro.url);
+---
+
+<Page title={post.data.title}>
+  <Fragment slot="head">
+    <meta name="description" content={post.data.description} />
+    <meta property="og:title" content={post.data.title} />
+    <meta property="og:description" content={post.data.description} />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:image" content={OGImageURL} />
+    <meta property="og:image:alt" content={post.data.title} />
+  </Fragment>
+
+  <Layout>
+    <h1>{post.data.title}</h1>
+    <Content />
+  </Layout>
+</Page>

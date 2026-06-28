@@ -4,8 +4,8 @@ import { z } from "astro/zod";
 import { defineCollection } from "astro:content";
 import { Temporal } from "temporal-polyfill-lite";
 
-const blogPostCollection = defineCollection({
-  loader: glob({ base: "./content/blog", pattern: "**/*.{md,mdx}" }),
+const postCollection = defineCollection({
+  loader: glob({ base: "./content/post", pattern: "**/*.{md,mdx}" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -25,6 +25,6 @@ const blogPostCollection = defineCollection({
 });
 
 export const collections = {
-  blog: blogPostCollection,
+  post: postCollection,
   ...defineFeatureFlagCollection(),
 };

@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Page from "../layouts/Page.astro";
 import { getCollection } from "astro:content";
 
-const allPosts = await getCollection("blog");
+const allPosts = await getCollection("post");
 ---
 
 <Page title="sushichan044.dev" disableTitleTemplate>

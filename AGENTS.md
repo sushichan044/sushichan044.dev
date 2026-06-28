@@ -5,7 +5,7 @@
 - `vp run check`: Run formatter, linter, type checker.
 - `vp run check:fix`: Run formatter, linter, type checker with auto-fix where possible.
 - `vp test`: Run tests.
-- `vp run dev --background` to run the development server. Use with background mode of Bash Tool.
+- `vp run dev` to run the development server. Use with background mode of Bash Tool.
 
 ## Coding Guide
 

@@ -11,11 +11,28 @@ export default defineConfig({
   run: {
     tasks: {
       check: {
-        command: ["vp run fmt:check", "vp lint", "eslint", "tsc --noEmit"],
+        command: [
+          "vp run fmt:check",
+          "vp lint",
+          "eslint",
+
+          "tsc --noEmit",
+          "astro check",
+        ],
         dependsOn: ["typegen"],
       },
       "check:fix": {
-        command: ["vp run fmt", "vp lint --fix", "eslint --fix", "tsc --noEmit"],
+        command: [
+          // Checks may change the code
+          "vp lint --fix",
+          "eslint --fix",
+
+          // fmt
+          "vp run fmt",
+
+          "tsc --noEmit",
+          "astro check",
+        ],
         dependsOn: ["typegen"],
       },
       fmt: {

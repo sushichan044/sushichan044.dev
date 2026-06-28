@@ -104,17 +104,20 @@ settings:
 
 catalogs:
   dev:
+    '@astrojs/check':
+      specifier: 0.9.9
+      version: 0.9.9
     '@astrojs/ts-plugin':
-      specifier: ^1.10.9
+      specifier: 1.10.9
       version: 1.10.9
     '@tailwindcss/vite':
-      specifier: ^4.3.1
+      specifier: 4.3.1
       version: 4.3.1
     '@types/node':
       specifier: 26.0.1
       version: 26.0.1
     '@typescript-eslint/parser':
-      specifier: ^8.62.0
+      specifier: 8.62.0
       version: 8.62.0
     '@typescript/native-preview':
       specifier: 7.0.0-dev.20260624.1
@@ -123,57 +126,73 @@ catalogs:
       specifier: 2.1.23
       version: 2.1.23
     eslint:
-      specifier: ^10.6.0
+      specifier: 10.6.0
       version: 10.6.0
     eslint-plugin-astro:
-      specifier: ^2.1.1
+      specifier: 2.1.1
       version: 2.1.1
     eslint-plugin-better-tailwindcss:
-      specifier: ^4.6.0
+      specifier: 4.6.0
       version: 4.6.0
     eslint-plugin-jsx-a11y:
-      specifier: ^6.10.2
+      specifier: 6.10.2
       version: 6.10.2
     prettier:
-      specifier: ^3.9.0
+      specifier: 3.9.0
       version: 3.9.0
     prettier-plugin-astro:
-      specifier: ^0.14.1
+      specifier: 0.14.1
       version: 0.14.1
     tailwindcss:
-      specifier: ^4.3.1
+      specifier: 4.3.1
       version: 4.3.1
     typescript:
       specifier: 6.0.3
       version: 6.0.3
     typescript-eslint:
-      specifier: ^8.62.0
+      specifier: 8.62.0
       version: 8.62.0
     unplugin-icons:
-      specifier: ^23.0.1
+      specifier: 23.0.1
       version: 23.0.1
     vite-plus:
       specifier: latest
       version: 0.2.1
     wrangler:
-      specifier: ^4.105.0
+      specifier: 4.105.0
       version: 4.105.0
   prod:
     '@astrojs/cloudflare':
-      specifier: ^14.0.1
+      specifier: 14.0.1
       version: 14.0.1
     astro:
-      specifier: ^7.0.3
+      specifier: 7.0.3
       version: 7.0.3
     astro-seo:
-      specifier: ^1.1.0
+      specifier: 1.1.0
       version: 1.1.0
+    astro-simple-feature-flags:
+      specifier: ^2.2.0
+      version: 2.2.0
     cnfast:
-      specifier: ^0.0.8
+      specifier: 0.0.8
       version: 0.0.8
+    hono:
+      specifier: 4.12.27
+      version: 4.12.27
+    takumi-js:
+      specifier: 2.0.0-rc.1
+      version: 2.0.0-rc.1
     temporal-polyfill-lite:
-      specifier: ^0.4.1
+      specifier: 0.4.1
       version: 0.4.1
+  react:
+    '@types/react':
+      specifier: 19.2.17
+      version: 19.2.17
+    react:
+      specifier: 19.2.7
+      version: 19.2.7
 
 overrides:
   vite: npm:@voidzero-dev/vite-plus-core@latest
@@ -193,15 +212,27 @@ importers:
         specifier: catalog:prod
         version: 1.1.0(prettier-plugin-astro@0.14.1)(prettier@3.9.0)(typescript@6.0.3)
       astro-simple-feature-flags:
-        specifier: ^2.2.0
+        specifier: catalog:prod
         version: 2.2.0(@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0))(astro@7.0.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@26.0.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0))
       cnfast:
         specifier: catalog:prod
         version: 0.0.8
+      hono:
+        specifier: catalog:prod
+        version: 4.12.27
+      react:
+        specifier: catalog:react
+        version: 19.2.7
+      takumi-js:
+        specifier: catalog:prod
+        version: 2.0.0-rc.1(react@19.2.7)
       temporal-polyfill-lite:
         specifier: catalog:prod
         version: 0.4.1
     devDependencies:
+      '@astrojs/check':
+        specifier: catalog:dev
+        version: 0.9.9(prettier-plugin-astro@0.14.1)(prettier@3.9.0)(typescript@6.0.3)
       '@astrojs/ts-plugin':
         specifier: catalog:dev
         version: 1.10.9
@@ -211,6 +242,9 @@ importers:
       '@types/node':
         specifier: catalog:dev
         version: 26.0.1
+      '@types/react':
+        specifier: catalog:react
+        version: 19.2.17
       '@typescript-eslint/parser':
         specifier: catalog:dev
         version: 8.62.0(eslint@10.6.0(jiti@2.7.0))(typescript@6.0.3)
@@ -1397,6 +1431,78 @@ packages:
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7 || ^8
 
+  '@takumi-rs/core-darwin-arm64@2.0.0-rc.1':
+    resolution: {integrity: sha512-soI5x6+2yypX/af+4pxojvhqNktfkJuqzlcVqGHyaFfTqP0f6gBJBkaY9qZ2Vfb2svAPRd/6UvB8MISMovyv2w==}
+    engines: {node: '>=18'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@takumi-rs/core-darwin-x64@2.0.0-rc.1':
+    resolution: {integrity: sha512-A/8QTxTjAVQtEgZ+59gwhIWcwCKS1d7+p6G6og51e/+JKlLYK+/xR6MvZt62zCp0aOprTVZYWD0A0ihxeRlC9w==}
+    engines: {node: '>=18'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@takumi-rs/core-linux-arm64-gnu@2.0.0-rc.1':
+    resolution: {integrity: sha512-ljTu8B/W8aXnd/2SoC39t/uiXrGgpGuSIU43G89ff6jF9GV57DSNitGDdSMxB9bzL8JV6vIUrndLfutP8E6DwQ==}
+    engines: {node: '>=18'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@takumi-rs/core-linux-arm64-musl@2.0.0-rc.1':
+    resolution: {integrity: sha512-CV8Uc9NCzU+n1okIicpsFvhE0KHiMTM3pHOi48HXMgkDERFpR+5kJy5iaRhF+GRfDMyeHV4VZQUDVZ6eWZwneA==}
+    engines: {node: '>=18'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
+  '@takumi-rs/core-linux-x64-gnu@2.0.0-rc.1':
+    resolution: {integrity: sha512-bIZO17dYjbnTfcqhlyW6iHJVChllMEgNcpb30imR5l+3nBjsG8mi+SrwwEee1qwAGWf+qdOAmlNs9FGMH195Mg==}
+    engines: {node: '>=18'}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@takumi-rs/core-linux-x64-musl@2.0.0-rc.1':
+    resolution: {integrity: sha512-cl2MnOubRRjfIMqLmAMht6NuIChBcyjAJYXfQq6k95bfgqwRUUPNWnlpFIryUp0WI257ZisaMoQIDHvMiJhZWA==}
+    engines: {node: '>=18'}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
+  '@takumi-rs/core-win32-arm64-msvc@2.0.0-rc.1':
+    resolution: {integrity: sha512-HJ3Hyy5jgu57RkRI/ymwB7aC/VXFKa0MRgpFuQCDW/36cYH34ecO6YK/gdaDZGN3btMwJNSQXgRIpCiP/kSY/Q==}
+    engines: {node: '>=18'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@takumi-rs/core-win32-x64-msvc@2.0.0-rc.1':
+    resolution: {integrity: sha512-k7oVU9+O6N2kR0JZhEQjUaNPswNye5KIATAtw2yonEqjdWX53hMqneoym6/s/8VOLiMiEdlSTRZKi1FvZPkkKw==}
+    engines: {node: '>=18'}
+    cpu: [x64]
+    os: [win32]
+
+  '@takumi-rs/core@2.0.0-rc.1':
+    resolution: {integrity: sha512-IAN90i0TzrnuSsNX1HeKoCj4l6jS8oBY2QttRidsTTpCEBUwrqoMRT3fNnOXV8sllppbz3R9H00slNyOT+CIig==}
+    engines: {node: '>=18'}
+
+  '@takumi-rs/helpers@2.0.0-rc.1':
+    resolution: {integrity: sha512-4iaAKdEJq4PzSH7GjB2gBAMmI9PmrdsUwRXE9gWo5EtsDOjhx98LOG9g2JSC50bBmgEI1TwseP5k+yuG2K2/+g==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
+  '@takumi-rs/wasm@2.0.0-rc.1':
+    resolution: {integrity: sha512-FYoXXJqjEQqpLE6lpBJ9QKpqSj9uMxCb7w8CBT8hhReBkfHf2o03cQjIIh2VwdI9GhxN9OFUYX/FZMQR4fMZfA==}
+    engines: {node: '>=18'}
+
   '@testing-library/dom@10.4.1':
     resolution: {integrity: sha512-o4PXJQidqJl82ckFaXUeoAW+XysPLauYI43Abki5hABd853iMhitooc6znOnczgbTYmEP6U6/y1ZyKAIsvMKGg==}
     engines: {node: '>=18'}
@@ -1442,6 +1548,9 @@ packages:
 
   '@types/node@26.0.1':
     resolution: {integrity: sha512-fc3KiUoBt6kie0N9bIW3E47vZsuaMf0PM2AaUpLCLT0s/LvX1nxAim6Fc049cNxODPpGm6qRAuUOB86SkRuPQw==}
+
+  '@types/react@19.2.17':
+    resolution: {integrity: sha512-MXfmqaVPEVgkBT/aY0aGCkRWWtByiYQXo3xdQ8r5RzuFrPiRn8Gar2tQdXSUQ2GKV3bkXckek89V8wQBY2Q/Aw==}
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
@@ -2019,6 +2128,9 @@ packages:
     resolution: {integrity: sha512-0LrrStPOdJj+SPCCrGhzryycLjwcgUSHBtxNA8aIDxf0GLsRh1cKYhB00Gd1lDOS4yGH69+SNn13+TWbVHETFQ==}
     engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0'}
 
+  csstype@3.2.3:
+    resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
+
   damerau-levenshtein@1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
 
@@ -2444,6 +2556,10 @@ packages:
   hastscript@9.0.1:
     resolution: {integrity: sha512-g7df9rMFX/SPi34tyGCyUBREQoKkapwdY/T04Qn9TDWfHhAYt4/I0gMVirzK5wEzeUqIjEB+LXC/ypb7Aqno5w==}
 
+  hono@4.12.27:
+    resolution: {integrity: sha512-1yrb/+w6HWQJrUCLkJ2IF5jNIPvvFkblV5RNOYl6bV+OA6p9GLcMpHFFGTosSvHvcAUibuUukRqhlYI4z32C7Q==}
+    engines: {node: '>=16.9.0'}
+
   html-escaper@3.0.3:
     resolution: {integrity: sha512-RuMffC89BOWQoY0WKGpIhn5gX3iI54O6nRA0yC124NYVtzjmFWBIiFd8M0x+ZdX0P9R4lADg1mgP8C7PxGOWuQ==}
 
@@ -2611,8 +2727,8 @@ packages:
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
-  js-yaml@4.2.0:
-    resolution: {integrity: sha512-ePWsvanv0DWuDRsW8dnt+R4jQ31SCRCQ7hhNcPXZPsoBZiemuZNYGf7adZdqX2D86j6rvKp3RpCxVTSb8WQlOw==}
+  js-yaml@4.3.0:
+    resolution: {integrity: sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==}
     hasBin: true
 
   json-buffer@3.0.1:
@@ -3043,6 +3159,10 @@ packages:
   react-is@17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
 
+  react@19.2.7:
+    resolution: {integrity: sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ==}
+    engines: {node: '>=0.10.0'}
+
   readdirp@4.1.2:
     resolution: {integrity: sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==}
     engines: {node: '>= 14.18.0'}
@@ -3264,6 +3384,10 @@ packages:
 
   tailwindcss@4.3.1:
     resolution: {integrity: sha512-hk+TB1m+K8CYNrP6rjQaq/Y+4Zylwpa87mLYBKCunwnnQ9p+fHb7kmSfGqyEJoxF/O6CDyABWVFEafNSYKll+Q==}
+
+  takumi-js@2.0.0-rc.1:
+    resolution: {integrity: sha512-FJ3KpQZWYo1yuBdIuawE+FpeaUQ4WyUQ96+e5iCPruoZpsliXgJQB5Lob/UneDJREaoPrMcGc6jLWs07DYeYpQ==}
+    engines: {node: '>=18'}
 
   tapable@2.3.3:
     resolution: {integrity: sha512-uxc/zpqFg6x7C8vOE7lh6Lbda8eEL9zmVm/PLeTPBRhh1xCgdWaQ+J1CUieGpIfm2HdtsUpRv+HshiasBMcc6A==}
@@ -3914,7 +4038,7 @@ snapshots:
     dependencies:
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
-      js-yaml: 4.2.0
+      js-yaml: 4.3.0
       picomatch: 4.0.4
       retext-smartypants: 6.2.0
       shiki: 4.3.0
@@ -4671,6 +4795,59 @@ snapshots:
       tailwindcss: 4.3.1
       vite: '@voidzero-dev/vite-plus-core@0.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0)'
 
+  '@takumi-rs/core-darwin-arm64@2.0.0-rc.1':
+    optional: true
+
+  '@takumi-rs/core-darwin-x64@2.0.0-rc.1':
+    optional: true
+
+  '@takumi-rs/core-linux-arm64-gnu@2.0.0-rc.1':
+    optional: true
+
+  '@takumi-rs/core-linux-arm64-musl@2.0.0-rc.1':
+    optional: true
+
+  '@takumi-rs/core-linux-x64-gnu@2.0.0-rc.1':
+    optional: true
+
+  '@takumi-rs/core-linux-x64-musl@2.0.0-rc.1':
+    optional: true
+
+  '@takumi-rs/core-win32-arm64-msvc@2.0.0-rc.1':
+    optional: true
+
+  '@takumi-rs/core-win32-x64-msvc@2.0.0-rc.1':
+    optional: true
+
+  '@takumi-rs/core@2.0.0-rc.1(react@19.2.7)':
+    dependencies:
+      '@takumi-rs/helpers': 2.0.0-rc.1(react@19.2.7)
+      csstype: 3.2.3
+    optionalDependencies:
+      '@takumi-rs/core-darwin-arm64': 2.0.0-rc.1
+      '@takumi-rs/core-darwin-x64': 2.0.0-rc.1
+      '@takumi-rs/core-linux-arm64-gnu': 2.0.0-rc.1
+      '@takumi-rs/core-linux-arm64-musl': 2.0.0-rc.1
+      '@takumi-rs/core-linux-x64-gnu': 2.0.0-rc.1
+      '@takumi-rs/core-linux-x64-musl': 2.0.0-rc.1
+      '@takumi-rs/core-win32-arm64-msvc': 2.0.0-rc.1
+      '@takumi-rs/core-win32-x64-msvc': 2.0.0-rc.1
+    transitivePeerDependencies:
+      - react
+      - react-dom
+
+  '@takumi-rs/helpers@2.0.0-rc.1(react@19.2.7)':
+    optionalDependencies:
+      react: 19.2.7
+
+  '@takumi-rs/wasm@2.0.0-rc.1(react@19.2.7)':
+    dependencies:
+      '@takumi-rs/helpers': 2.0.0-rc.1(react@19.2.7)
+      csstype: 3.2.3
+    transitivePeerDependencies:
+      - react
+      - react-dom
+
   '@testing-library/dom@10.4.1':
     dependencies:
       '@babel/code-frame': 7.29.7
@@ -4725,6 +4902,10 @@ snapshots:
   '@types/node@26.0.1':
     dependencies:
       undici-types: 8.3.0
+
+  '@types/react@19.2.17':
+    dependencies:
+      csstype: 3.2.3
 
   '@types/unist@3.0.3': {}
 
@@ -5172,7 +5353,7 @@ snapshots:
       github-slugger: 2.0.0
       html-escaper: 3.0.3
       http-cache-semantics: 4.2.0
-      js-yaml: 4.2.0
+      js-yaml: 4.3.0
       jsonc-parser: 3.3.1
       magic-string: 0.30.21
       magicast: 0.5.3
@@ -5389,6 +5570,8 @@ snapshots:
   csso@5.0.5:
     dependencies:
       css-tree: 2.2.1
+
+  csstype@3.2.3: {}
 
   damerau-levenshtein@1.0.8: {}
 
@@ -5965,6 +6148,8 @@ snapshots:
       property-information: 7.2.0
       space-separated-tokens: 2.0.2
 
+  hono@4.12.27: {}
+
   html-escaper@3.0.3: {}
 
   html-void-elements@3.0.0: {}
@@ -6117,7 +6302,7 @@ snapshots:
 
   js-tokens@4.0.0: {}
 
-  js-yaml@4.2.0:
+  js-yaml@4.3.0:
     dependencies:
       argparse: 2.0.1
 
@@ -6548,6 +6733,8 @@ snapshots:
 
   react-is@17.0.2: {}
 
+  react@19.2.7: {}
+
   readdirp@4.1.2: {}
 
   readdirp@5.0.0: {}
@@ -6860,6 +7047,15 @@ snapshots:
   tailwind-csstree@0.3.3: {}
 
   tailwindcss@4.3.1: {}
+
+  takumi-js@2.0.0-rc.1(react@19.2.7):
+    dependencies:
+      '@takumi-rs/core': 2.0.0-rc.1(react@19.2.7)
+      '@takumi-rs/helpers': 2.0.0-rc.1(react@19.2.7)
+      '@takumi-rs/wasm': 2.0.0-rc.1(react@19.2.7)
+    transitivePeerDependencies:
+      - react
+      - react-dom
 
   tapable@2.3.3: {}
 

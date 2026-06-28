@@ -8,7 +8,7 @@ export default defineConfig({
   adapter: cloudflare({
     imageService: {
       build: "compile",
-      runtime: "passthrough",
+      runtime: "passthrough", // To save money
     },
   }),
   experimental: {
@@ -26,8 +26,11 @@ export default defineConfig({
     ],
   },
   site: "https://sushichan044.dev",
+  integrations: [simpleFeatureFlags()],
   vite: {
+    build: {
+      minify: import.meta.env.PROD && "oxc",
+    },
     plugins: [tailwindcss(), Icons({ compiler: "astro" })],
   },
-  integrations: [simpleFeatureFlags()],
 });
