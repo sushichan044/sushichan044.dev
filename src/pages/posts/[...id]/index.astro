@@ -9,6 +9,7 @@ import MDXRenderer from "../../../lib/mdx/MDXRenderer.astro";
 import ContentContainer from "../../../components/ContentContainer.astro";
 import OpenGraphArticle from "../../../components/meta/OpenGraph/OpenGraphArticle.astro";
 import FormattedPostDate from "../../../features/posts/components/FormattedPostDate.astro";
+import Link from "../../../components/Link.astro";
 
 type Props = {
   post: CollectionEntry<"post">;
@@ -56,11 +57,37 @@ const OGImageURL = new URL(
         >
           {post.data.title}
         </h1>
-        <FormattedPostDate
-          class="text-sm text-zinc-500 dark:text-zinc-400"
-          time={post.data.publishedAt}
-          variant="long"
-        />
+        <div class="flex flex-row place-items-center gap-x-2xs">
+          <FormattedPostDate
+            class="text-sm text-zinc-500 dark:text-zinc-400"
+            time={post.data.publishedAt}
+            variant="long"
+          />
+
+          {
+            post.data.tags.length > 0 && (
+              <span class="text-sm text-zinc-500 dark:text-zinc-400">
+                {" | "}
+                {post.data.tags.map((tag, index) => (
+                  <Fragment key={tag}>
+                    <Link
+                      href={$path({
+                        to: "/posts",
+                        search: {
+                          tag: [tag],
+                        },
+                      })}
+                      class="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+                    >
+                      {tag}
+                    </Link>
+                    {index < post.data.tags.length - 1 && ", "}
+                  </Fragment>
+                ))}
+              </span>
+            )
+          }
+        </div>
       </div>
       <article class="space-y-sm">
         <MDXRenderer Content={Content} />

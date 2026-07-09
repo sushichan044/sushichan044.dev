@@ -1,18 +1,35 @@
 ---
 import Page from "../../layouts/Page.astro";
 import Layout from "../../layouts/Layout.astro";
-import { getAllPublicPosts } from "../../lib/content/query";
+import { createRoute } from "astro-typesafe-routes/create-route";
+import {
+  filterPostsByTags,
+  getAllPublicPosts,
+  sortPostsByPublishedAt,
+} from "../../lib/content/query";
 import ContentContainer from "../../components/ContentContainer.astro";
 import PostList from "../../components/PostList.astro";
+import { z } from "astro/zod";
 
-const allPosts = await getAllPublicPosts();
+const allPosts = sortPostsByPublishedAt(await getAllPublicPosts(), "desc");
+
+export const Route = createRoute({
+  routeId: "/posts",
+  searchSchema: z.object({
+    tag: z.array(z.string()).optional(),
+  }),
+});
+const queries = Route.getSearch(Astro);
+const requestedPosts = filterPostsByTags(allPosts, queries.tag ?? []);
+
+export const prerender = false;
 ---
 
 <Page title="posts">
   <Layout>
     <ContentContainer>
       <h1 class="text-xl font-semibold">Posts</h1>
-      <PostList posts={allPosts} />
+      <PostList posts={requestedPosts} />
     </ContentContainer>
   </Layout>
 </Page>
