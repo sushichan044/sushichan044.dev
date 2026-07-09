@@ -1,4 +1,5 @@
 import cloudflare from "@astrojs/cloudflare";
+import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 import og from "astro-og";
 import simpleFeatureFlags from "astro-simple-feature-flags";
@@ -28,7 +29,7 @@ export default defineConfig({
     ],
   },
   site: "https://sushichan044.dev",
-  integrations: [simpleFeatureFlags(), typesafeRoutes(), og()],
+  integrations: [simpleFeatureFlags(), typesafeRoutes(), og(), mdx()],
   vite: {
     build: {
       minify: import.meta.env.PROD && "oxc",
