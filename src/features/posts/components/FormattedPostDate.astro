@@ -1,5 +1,6 @@
 ---
 import { HTMLAttributes } from "astro/types";
+import cn from "cnfast";
 
 interface Props extends Omit<HTMLAttributes<"time">, "dateTime"> {
   time: Temporal.ZonedDateTime;
@@ -9,7 +10,7 @@ interface Props extends Omit<HTMLAttributes<"time">, "dateTime"> {
   variant?: "short" | "long";
 }
 
-const { time, variant = "short", ...rest } = Astro.props;
+const { time, variant = "short", class: className, ...rest } = Astro.props;
 
 const pretty =
   variant === "long"
@@ -27,6 +28,10 @@ const pretty =
       });
 ---
 
-<time datetime={time.toString({ timeZoneName: "never" })} {...rest}>
+<time
+  class={cn("tabular-nums", className)}
+  datetime={time.toString({ timeZoneName: "never" })}
+  {...rest}
+>
   {pretty}
 </time>
