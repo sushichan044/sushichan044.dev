@@ -51,7 +51,7 @@
     "typescript": "catalog:dev",
     "typescript-eslint": "catalog:dev",
     "unplugin-icons": "catalog:dev",
-    "vite": "catalog:dev",
+    "vite": "npm:@voidzero-dev/vite-plus-core@latest",
     "vite-plus": "catalog:dev",
     "wrangler": "catalog:dev"
   },
