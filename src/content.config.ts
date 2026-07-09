@@ -6,10 +6,10 @@ import { defineCollection } from "astro:content";
 import "temporal-polyfill-lite/global";
 
 const postCollection = defineCollection({
-  loader: glob({ base: "./content/post", pattern: "**/*.{md,mdx}" }),
+  loader: glob({ base: "./content/post", pattern: "**/*.(md|mdx)" }),
   schema: z.object({
     title: z.string(),
-    description: z.string(),
+    description: z.string().optional(),
     publishedAt: z.coerce
       .date()
       .transform((date) =>
