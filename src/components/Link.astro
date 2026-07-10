@@ -15,14 +15,17 @@ interface Props extends HTMLAttributes<"a"> {
    *
    * @default "Automatically determined based on the href prop"
    */
-  external?: boolean;
+  showExternal?: boolean;
 }
 
 const {
   variant = "text",
   class: className,
+  "class:list": classList,
   href: _href,
-  external,
+  showExternal,
+  target,
+  rel,
   ...rest
 } = Astro.props;
 const href = _href ?? "";
@@ -32,7 +35,9 @@ const destinationOrigin = new URL(href, currentOrigin).origin;
 
 const seemsExternal = currentOrigin !== destinationOrigin;
 
-const treatAsExternal = external ?? seemsExternal;
+const t = target ?? (seemsExternal ? "_blank" : undefined);
+const r = rel ?? (seemsExternal ? "noopener noreferrer" : undefined);
+const externalIcon = showExternal ?? seemsExternal;
 ---
 
 <a
@@ -44,13 +49,22 @@ const treatAsExternal = external ?? seemsExternal;
     variant === "text" &&
       "text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100",
     variant !== "unstyled" && "transition-colors duration-150 ease-linear",
-    treatAsExternal && "inline-flex items-center gap-2xs",
     className,
+    classList,
   )}
   href={href}
-  target={treatAsExternal ? "_blank" : undefined}
-  rel={treatAsExternal ? "noopener noreferrer" : undefined}
+  target={t}
+  rel={r}
 >
   <slot />
-  {treatAsExternal && <ExternalLinkIcon height={16} width={16} />}
+  {
+    externalIcon && (
+      <ExternalLinkIcon
+        class="ms-xs inline-flex align-text-top leading-none"
+        aria-hidden="true"
+        height={16}
+        width={16}
+      />
+    )
+  }
 </a>

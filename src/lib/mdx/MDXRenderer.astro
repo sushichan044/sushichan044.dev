@@ -1,6 +1,8 @@
 ---
 import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 import Link from "../../components/Link.astro";
+import BlockQuote from "../../components/BlockQuote.astro";
+import Hr from "../../components/Hr.astro";
 
 type Props = {
   Content: AstroComponentFactory;
@@ -10,6 +12,8 @@ const { Content } = Astro.props;
 
 const componentsMap = {
   a: Link,
+  blockquote: BlockQuote,
+  hr: Hr,
 };
 ---
 

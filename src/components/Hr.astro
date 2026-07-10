@@ -1,0 +1,16 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import cn from "cnfast";
+
+type Props = HTMLAttributes<"hr">;
+
+const { class: className, "class:list": classList, ...rest } = Astro.props;
+
+const cls = cn(
+  "my-md border-zinc-300 dark:border-zinc-700",
+  className,
+  classList,
+);
+---
+
+<hr class={cls} {...rest} />

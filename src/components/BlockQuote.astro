@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import cn from "cnfast";
+
+type Props = HTMLAttributes<"blockquote">;
+
+const { class: className, "class:list": classList, ...rest } = Astro.props;
+
+const cls = cn(
+  "space-y-xs border-l-4 border-zinc-300 pl-2xs text-zinc-700 dark:border-zinc-700 dark:text-zinc-300",
+  "*:ms-sm",
+  className,
+  classList,
+);
+---
+
+<blockquote class={cls} {...rest}>
+  <slot />
+</blockquote>
