@@ -1,3 +1,5 @@
+import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
+
 type Theme = "dark" | "light";
 
 export type ThemePreference = Theme | "system";
@@ -35,29 +37,29 @@ export function listenSystemThemeChange() {
 }
 
 /**
- * Re-apply the theme after Astro soft navigation (view transitions).
+ * Apply the theme to the incoming document before Astro swaps it in.
  *
  * @see {@link https://docs.astro.build/en/guides/view-transitions/#script-re-execution}
  */
 export function listenAstroSoftNavigation() {
-  document.addEventListener("astro:after-swap", () => {
-    applyTheme();
+  document.addEventListener("astro:before-swap", (event: TransitionBeforeSwapEvent) => {
+    applyTheme(event.newDocument);
   });
 }
 
-function applyTheme() {
+function applyTheme(targetDocument = window.document) {
   const preference = getPreference();
 
-  _apply(preference);
+  _apply(preference, targetDocument);
 }
 
-function _apply(preference: ThemePreference) {
+function _apply(preference: ThemePreference, targetDocument = window.document) {
   const resolved = resolveTheme(preference);
   const colorScheme = preference === "system" ? "light dark" : preference;
 
-  window.document.documentElement.dataset["theme"] = resolved;
-  window.document.documentElement.dataset["themePreference"] = preference;
-  window.document.documentElement.style.setProperty("color-scheme", colorScheme);
+  targetDocument.documentElement.dataset["theme"] = resolved;
+  targetDocument.documentElement.dataset["themePreference"] = preference;
+  targetDocument.documentElement.style.setProperty("color-scheme", colorScheme);
 }
 
 export function getPreference(): ThemePreference {

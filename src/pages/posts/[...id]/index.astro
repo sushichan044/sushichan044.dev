@@ -73,6 +73,7 @@ const OGImageURL = new URL(
                     <Link
                       href={$path({
                         to: "/posts",
+                        // @ts-expect-error We need to fix astro-type-safe-routes
                         search: {
                           tag: [tag],
                         },
