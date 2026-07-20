@@ -141,3 +141,5 @@ vite.config.ts.timestamp-*
 
 .astro
 .wrangler
+.playwright-cli/
+.superpowers/

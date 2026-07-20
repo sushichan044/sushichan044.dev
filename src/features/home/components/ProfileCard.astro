@@ -1,0 +1,35 @@
+---
+interface Props {
+  avatarUrl: string;
+  description: string;
+  name: string;
+}
+
+const { avatarUrl, description, name } = Astro.props;
+---
+
+<section
+  aria-labelledby="profile-heading"
+  class="flex h-full items-center gap-md p-md md:gap-lg md:p-lg"
+>
+  <img
+    src={avatarUrl}
+    alt=""
+    width="128"
+    height="128"
+    fetchpriority="high"
+    class="size-[5rem] shrink-0 rounded-full object-cover md:size-[6rem]"
+  />
+
+  <div class="min-w-0 space-y-xs">
+    <h1
+      id="profile-heading"
+      class="text-2xl font-semibold tracking-tight text-zinc-950 md:text-3xl dark:text-zinc-50"
+    >
+      {name}
+    </h1>
+    <p class="text-md/relaxed text-zinc-600 dark:text-zinc-300">
+      {description}
+    </p>
+  </div>
+</section>

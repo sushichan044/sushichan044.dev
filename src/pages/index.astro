@@ -1,33 +1,92 @@
 ---
-import { $path } from "astro-typesafe-routes/path";
-
-import Link from "../components/Link.astro";
-import PostList from "../components/PostList.astro";
-
+import LinkCard from "../features/home/components/LinkCard.astro";
+import ProfileCard from "../features/home/components/ProfileCard.astro";
+import RecentPostsCard from "../features/home/components/RecentPostsCard.astro";
 import Layout from "../layouts/Layout.astro";
 import Page from "../layouts/Page.astro";
 import { getRecentPublicPosts } from "../lib/content/query";
-import ArrowRightIcon from "~icons/lucide/arrow-right";
-import ContentContainer from "../components/ContentContainer.astro";
+import BookmarkIcon from "~icons/lucide/bookmark";
+import FlaskConicalIcon from "~icons/lucide/flask-conical";
+import GithubIcon from "~icons/lucide/github";
+import GitPullRequestArrowIcon from "~icons/lucide/git-pull-request-arrow";
 
-const posts = await getRecentPublicPosts(5);
+const posts = await getRecentPublicPosts(3);
 ---
 
 <Page title="sushichan044.dev" disableTitleTemplate>
   <Layout>
-    <ContentContainer>
-      <h2 class="text-xl font-semibold">Recent posts</h2>
-
-      <PostList posts={posts} />
-
-      <div class="flex justify-end">
-        <Link
-          class="inline-flex flex-row place-items-center gap-xs"
-          href={$path({ to: "/posts" })}
-        >
-          View all posts <ArrowRightIcon />
-        </Link>
+    <div
+      class="mx-auto grid max-w-4xl grid-cols-1 gap-md pbs-md md:pbs-xl lg:grid-cols-4"
+    >
+      <div class="lg:col-span-3">
+        <ProfileCard
+          name="sushichan044"
+          description="A software engineer with a passion for novels and music."
+          avatarUrl="https://github.com/sushichan044.png"
+        />
       </div>
-    </ContentContainer>
+
+      <nav
+        aria-label="Social links"
+        class="grid grid-cols-2 gap-md lg:col-span-1 lg:grid-cols-1"
+      >
+        <LinkCard
+          title="GitHub"
+          description="@sushichan044"
+          href="https://github.com/sushichan044"
+          size="compact"
+        >
+          <GithubIcon slot="icon" />
+        </LinkCard>
+        <LinkCard
+          title="X"
+          description="@sushichan044"
+          href="https://x.com/sushichan044"
+          size="compact"
+        >
+          <span slot="icon" class="font-semibold">X</span>
+        </LinkCard>
+      </nav>
+
+      <div class="lg:col-span-4">
+        <RecentPostsCard posts={posts} />
+      </div>
+
+      <section aria-labelledby="tools-heading" class="space-y-md lg:col-span-4">
+        <h2
+          id="tools-heading"
+          class="px-2xs text-xl font-semibold text-zinc-950 dark:text-zinc-50"
+        >
+          Tools
+        </h2>
+
+        <div class="grid grid-cols-1 gap-md md:grid-cols-3">
+          <LinkCard
+            title="UI Lab"
+            description="Experiments with new web technologies and UI implementations."
+            href="https://ui-lab.sushichan044.dev/"
+            size="regular"
+          >
+            <FlaskConicalIcon slot="icon" />
+          </LinkCard>
+          <LinkCard
+            title="Bookmarklets"
+            description="A collection of bookmarklets."
+            href="https://bm.sushichan044.dev/"
+            size="regular"
+          >
+            <BookmarkIcon slot="icon" />
+          </LinkCard>
+          <LinkCard
+            title="Pull Requests"
+            description="Recent pull requests on GitHub."
+            href="https://prs.sushichan044.dev/"
+            size="regular"
+          >
+            <GitPullRequestArrowIcon slot="icon" />
+          </LinkCard>
+        </div>
+      </section>
+    </div>
   </Layout>
 </Page>

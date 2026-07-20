@@ -7,6 +7,7 @@ import typesafeRoutes from "astro-typesafe-routes";
 import { defineConfig, svgoOptimizer } from "astro/config";
 import Icons from "unplugin-icons/vite";
 
+// @ts-expect-error type mismatch
 export default defineConfig({
   adapter: cloudflare({
     imageService: {
@@ -34,6 +35,10 @@ export default defineConfig({
     build: {
       minify: import.meta.env.PROD && "oxc",
     },
-    plugins: [tailwindcss(), Icons({ compiler: "astro" })],
+    plugins: [
+      // @ts-expect-error type mismatch
+      tailwindcss(),
+      Icons({ compiler: "astro" }),
+    ],
   },
 });

@@ -1,0 +1,61 @@
+---
+import cn from "cnfast";
+
+import Link from "../../../components/Link.astro";
+import ExternalLinkIcon from "~icons/lucide/external-link";
+
+type Size = "compact" | "regular";
+
+interface Props {
+  description: string;
+  href: string;
+  size: Size;
+  title: string;
+}
+
+const { description, href, size, title } = Astro.props;
+---
+
+<Link
+  href={href}
+  variant="unstyled"
+  showExternal={false}
+  class={cn(
+    "group grid min-h-full transition-colors duration-150 ease-linear hover:bg-zinc-100/70 focus:outline-2 focus:outline-offset-4 focus:outline-zinc-950 dark:hover:bg-zinc-800/40 dark:focus:outline-zinc-50",
+    size === "compact"
+      ? "grid-cols-[auto_1fr_auto] items-center gap-sm rounded-xl p-sm"
+      : "grid-cols-[1fr_auto] gap-lg rounded-2xl p-lg",
+  )}
+>
+  <span
+    class={cn(
+      "flex shrink-0 items-center justify-center text-zinc-700 dark:text-zinc-300",
+      size === "compact" ? "size-[2.25rem] text-lg" : "size-[2.5rem] text-xl",
+    )}
+    aria-hidden="true"
+  >
+    <slot name="icon" />
+  </span>
+
+  <span class={cn("min-w-0 space-y-2xs", size === "regular" && "col-span-2")}>
+    <span class="block font-semibold text-zinc-950 dark:text-zinc-50">
+      {title}
+    </span>
+    <span
+      class={cn(
+        "leading-relaxed text-zinc-600 dark:text-zinc-300",
+        size === "compact" ? "hidden text-sm sm:block" : "block text-md",
+      )}
+    >
+      {description}
+    </span>
+  </span>
+
+  <ExternalLinkIcon
+    class={cn(
+      "size-md shrink-0 text-zinc-500 transition-transform duration-150 group-hover:translate-x-[0.125rem] group-hover:translate-y-[-0.125rem] dark:text-zinc-400",
+      size === "regular" && "col-start-2 row-start-1",
+    )}
+    aria-hidden="true"
+  />
+</Link>

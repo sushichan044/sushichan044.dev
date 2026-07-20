@@ -3,6 +3,11 @@ allowBuilds:
   sharp: true
   workerd: true
 
+supportedArchitectures:
+  cpu:
+    - current
+    - wasm32
+
 catalogs:
   dev:
     "@arethetypeswrong/core": 0.18.4
@@ -34,7 +39,7 @@ catalogs:
     unplugin-unused: 0.5.7
     vite: npm:@voidzero-dev/vite-plus-core@latest
     vitest: 4.1.9
-    vite-plus: latest
+    vite-plus: 0.2.5
     wrangler: 4.107.1
   prod:
     "@astrojs/mdx": 7.0.2
@@ -49,9 +54,6 @@ catalogs:
   react:
     react: 19.2.7
     "@types/react": 19.2.17
-
-configDependencies:
-  "@pnpm/pacquet": 0.11.12
 
 minimumReleaseAgeExclude:
   - prettier@3.9.0
