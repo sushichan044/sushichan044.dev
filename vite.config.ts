@@ -116,13 +116,17 @@ export default defineConfig({
       },
       "fmt:astro": {
         command: "prettier --write src/**/*.astro",
-        input: ["src/**/*.astro"],
-        output: ["src/**/*.astro"],
+        cache: {
+          input: ["src/**/*.astro"],
+          output: ["src/**/*.astro"],
+        },
       },
       "fmt:astro:check": {
         command: "prettier --check src/**/*.astro",
-        input: ["src/**/*.astro"],
-        output: ["src/**/*.astro"],
+        cache: {
+          input: ["src/**/*.astro"],
+          output: ["src/**/*.astro"],
+        },
       },
       typegen: {
         command: ["astro sync", "wrangler types", "vp fmt worker-configuration.d.ts"],

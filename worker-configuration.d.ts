@@ -101,7 +101,7 @@ declare abstract class WorkerGlobalScope extends EventTarget<WorkerGlobalScopeEv
  * [MDN Reference](https://developer.mozilla.org/docs/Web/API/console)
  */
 interface Console {
-  "assert"(condition?: boolean, ...data: any[]): void;
+  assert(condition?: boolean, ...data: any[]): void;
   /**
    * The **`console.clear()`** static method clears the console if possible.
    *
@@ -7019,8 +7019,7 @@ interface Ai_Cf_Openai_Whisper_Large_V3_Turbo_Output {
      */
     compression_ratio?: number;
     /**
-     * The probability that the segment contains no speech, represented as a decimal between 0 and
-     * 1.
+     * The probability that the segment contains no speech, represented as a decimal between 0 and 1.
      */
     no_speech_prob?: number;
     words?: {
@@ -13986,7 +13985,9 @@ declare type IncomingRequestCfPropertiesEdgeRequestKeepAliveStatus =
   | 4 /**
      * Connection re-use, refused by the origin server (`TCP FIN`)
      */
-  | 5; /** connection re-use, accepted by the origin server */
+  | 5; /**
+ * Connection re-use, accepted by the origin server
+ */
 /**
  * ISO 3166-1 Alpha-2 codes
  */

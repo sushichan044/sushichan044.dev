@@ -38,8 +38,8 @@ catalogs:
     unplugin-icons: 23.0.1
     unplugin-unused: 0.5.7
     vite: npm:@voidzero-dev/vite-plus-core@latest
-    vitest: 4.1.9
-    vite-plus: 0.2.5
+    vitest: 5.1.0
+    vite-plus: 1.7.0
     wrangler: 4.107.1
   prod:
     "@astrojs/mdx": 7.0.2
